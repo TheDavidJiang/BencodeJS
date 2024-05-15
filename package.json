@@ -1,0 +1,15 @@
+{
+  "name": "bencode",
+  "version": "1.0.0",
+  "description": "Bencode",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "David Jiang",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "prettier": "3.2.5"
+  }
+}
