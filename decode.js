@@ -1,9 +1,8 @@
-const [decodeInt, decodeStr, decodeList] = require("./helpers")
+const [decodeInt, decodeStr, decodeList] = require("./helpers");
 
-function decode(str){
-
-    //returning different types
-    return decodeList(str)
+function decode(str) {
+  //returning different types
+  return decodeList(str);
 }
 
-module.exports = decode
+module.exports = decode;

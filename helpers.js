@@ -153,89 +153,82 @@ function decodeList(input) {
     }
   }
 
-
   let finalResult = [];
-  let loop = 0
-  let remainingContent = input.slice(lIndex + 1)
-  let totalMover = 0
+  let loop = 0;
+  let remainingContent = input.slice(lIndex + 1);
+  let totalMover = 0;
 
   while (remainingContent[0] != "e") {
-    loop += 1
+    loop += 1;
     let identifier = remainingContent[0]; //this gets the first character after the "L"
     if (identifier == "i") {
       let [mover, value] = decodeInt(remainingContent);
       finalResult.push(value);
-      remainingContent = remainingContent.slice(mover)
-      totalMover += mover
-
+      remainingContent = remainingContent.slice(mover);
+      totalMover += mover;
     } //***mover part in the list not making sense
     else if (identifier == "l") {
       let [mover, value] = decodeList(remainingContent);
-      finalResult.push(value)
-      remainingContent = remainingContent.slice(mover)
-      totalMover += mover
-
+      finalResult.push(value);
+      remainingContent = remainingContent.slice(mover);
+      totalMover += mover;
     } else if (identifier == "d") {
       //decodeDictionary
       //identifier += input[0]
-      let [mover, value] = decodeDict(remainingContent)
-      finalResult.push(value)
-      remainingContent = remainingContent.slice(mover)
-      totalMover += mover
+      let [mover, value] = decodeDict(remainingContent);
+      finalResult.push(value);
+      remainingContent = remainingContent.slice(mover);
+      totalMover += mover;
     } else {
       let [mover, value] = decodeStr(remainingContent);
       finalResult.push(value);
-      remainingContent = remainingContent.slice(mover)
-      totalMover += mover
+      remainingContent = remainingContent.slice(mover);
+      totalMover += mover;
     }
-
   }
-  let finalFinalResult = [totalMover + 2, finalResult]
+  let finalFinalResult = [totalMover + 2, finalResult];
   return finalFinalResult;
 }
 //for a list, take in the length of each tuple and increment the index by the length + 2 (since this accounts for the l and e)
 
-
-function decodeDict(str){
+function decodeDict(str) {
   //slice off the d
-  let remainingContent = str.slice(1)
-  let finalResult = {}
+  let remainingContent = str.slice(1);
+  let finalResult = {};
   //keep track of how many characters we've consumed
-  let totalMover = 0
+  let totalMover = 0;
 
   //while that first character is not "e", run decodeInt/Str/List/Dict
-  while (remainingContent[0] != "e"){
-    let [keyMover, key] = decodeStr(remainingContent)
-    totalMover += keyMover
-    remainingContent = remainingContent.slice(keyMover)
-    let identifier = remainingContent[0]
-    if (identifier == "i"){
-      let [valueMover, value] = decodeInt(remainingContent)
-      totalMover += valueMover
-      finalResult[key] = value
-      remainingContent = remainingContent.slice(valueMover)
-    }
-    else if (identifier == "l"){
-      let [valueMover, value] = decodeList(remainingContent)
-      totalMover += valueMover
-      finalResult[key] = value
-      remainingContent = remainingContent.slice(valueMover)
-    }
-    else if (identifier == "d"){
-      let [valueMover, value] = decodeDict(remainingContent)
-      totalMover += valueMover
-      finalResult[key] = value
-      remainingContent = remainingContent.slice(valueMover)
-    }else{
-      let [valueMover, value] = decodeStr(remainingContent)
-      totalMover += valueMover
-      finalResult[key] = value
-      remainingContent = remainingContent.slice(valueMover)
+  while (remainingContent[0] != "e") {
+    let [keyMover, key] = decodeStr(remainingContent);
+    totalMover += keyMover;
+    remainingContent = remainingContent.slice(keyMover);
+    let identifier = remainingContent[0];
+    if (identifier == "i") {
+      let [valueMover, value] = decodeInt(remainingContent);
+      totalMover += valueMover;
+      finalResult[key] = value;
+      remainingContent = remainingContent.slice(valueMover);
+    } else if (identifier == "l") {
+      let [valueMover, value] = decodeList(remainingContent);
+      totalMover += valueMover;
+      finalResult[key] = value;
+      remainingContent = remainingContent.slice(valueMover);
+    } else if (identifier == "d") {
+      let [valueMover, value] = decodeDict(remainingContent);
+      totalMover += valueMover;
+      finalResult[key] = value;
+      remainingContent = remainingContent.slice(valueMover);
+    } else {
+      let [valueMover, value] = decodeStr(remainingContent);
+      totalMover += valueMover;
+      finalResult[key] = value;
+      remainingContent = remainingContent.slice(valueMover);
     }
   }
 
-  let finalFinalResult = [totalMover + 2, finalResult]
+  let finalFinalResult = [totalMover + 2, finalResult];
 
-  return finalFinalResult
+  return finalFinalResult;
 }
 module.exports = [decodeInt, decodeStr, decodeList, decodeDict];

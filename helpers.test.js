@@ -21,8 +21,8 @@ test("4:spam should be spam", () => {
 test("100:maplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestory should be maplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestory", () => {
   expect(
     decodeStr(
-      "100:maplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestory",
-    ),
+      "100:maplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestory"
+    )
   ).toStrictEqual([
     104,
     "maplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestorymaplestory",
@@ -49,36 +49,42 @@ test('l4:spami42ee should be ["spam", 42]', () => {
   expect(decodeList("l4:spami42ee")).toStrictEqual([12, ["spam", 42]]);
 });
 test('ll4:spamee should be [["spam"]]', () => {
-  expect(decodeList("ll4:spamee")).toStrictEqual([10,[["spam"]]]);
+  expect(decodeList("ll4:spamee")).toStrictEqual([10, [["spam"]]]);
 });
 // test('ld3:bar4:spamee should be [{"bar": "spam"}]', () => {
 //   expect(decodeList("ld3:bar4:spamee")).toStrictEqual([15,[{"bar": "spam"}]]);
 // });
-
 
 //Dictionaries
 test("--", () => {
   expect(decodeDict("de")).toStrictEqual([2, {}]);
 });
 test("--", () => {
-  expect(decodeDict("d4:spami32ee")).toStrictEqual([12, {"spam": 32}]);
+  expect(decodeDict("d4:spami32ee")).toStrictEqual([12, { spam: 32 }]);
 });
 test("--", () => {
-  expect(decodeDict("d4:spam4:pork3:cow0:e")).toStrictEqual([21, {"spam": "pork", "cow": ""}]);
+  expect(decodeDict("d4:spam4:pork3:cow0:e")).toStrictEqual([
+    21,
+    { spam: "pork", cow: "" },
+  ]);
 });
 test("--", () => {
-  expect(decodeDict("d4:spam4:pork3:cowi32ee")).toStrictEqual([23, {"spam": "pork", "cow": 32}]);
+  expect(decodeDict("d4:spam4:pork3:cowi32ee")).toStrictEqual([
+    23,
+    { spam: "pork", cow: 32 },
+  ]);
 });
 
 test("--", () => {
-  expect(decodeDict("d4:spam4:pork5:extrad3:cow3:sayee")).toStrictEqual([33, {"spam": "pork", "extra": {"cow": "say"}}]);
+  expect(decodeDict("d4:spam4:pork5:extrad3:cow3:sayee")).toStrictEqual([
+    33,
+    { spam: "pork", extra: { cow: "say" } },
+  ]);
 });
-
 
 test("--", () => {
-  expect(decodeDict("d4:spamli32eee")).toStrictEqual([14, {"spam": [32]}]);
+  expect(decodeDict("d4:spamli32eee")).toStrictEqual([14, { spam: [32] }]);
 });
 test("--", () => {
-  expect(decodeDict("d4:spamli32eeeextra")).toStrictEqual([14, {"spam": [32]}]);
+  expect(decodeDict("d4:spamli32eeeextra")).toStrictEqual([14, { spam: [32] }]);
 });
-
