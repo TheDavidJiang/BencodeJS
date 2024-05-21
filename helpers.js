@@ -27,22 +27,9 @@
 function decodeInt(str) {
   //Goal: return a tuple of [# of characters, the value itself]
 
-  let iIndex = 0;
-  let eIndex = 0;
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] == "i") {
-      iIndex = i;
-      break;
-    }
-  }
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] == "e") {
-      eIndex = i;
-      break;
-    }
-  }
+  let eIndex = str.indexOf("e");
 
-  let finalValue = parseInt(str.slice(iIndex + 1, eIndex));
+  let finalValue = parseInt(str.slice(1, eIndex));
   const strLength = eIndex + 1;
   let finalArr = [strLength, finalValue];
 
@@ -70,18 +57,12 @@ function decodeInt(str) {
 // }
 function decodeStr(str) {
   //return for the value from colon to the colon+length
-  let colonIndex = 0;
+  let colonIndex = str.indexOf(":");
   //run a loop to iterate through the string for the colon
   //if the character before the colon can be converted to an int
   //if the character before THAT can be converted to an int
   //get that number as the length
   //return (slice the string from colonIndex + 1 to colonIndex + length)
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] == ":") {
-      colonIndex = i;
-      break;
-    }
-  }
   let myLength = parseInt(str.slice(0, colonIndex));
   let myContent = str.slice(colonIndex + 1, colonIndex + myLength + 1);
 
@@ -145,13 +126,7 @@ function decodeStr(str) {
 function decodeList(input) {
   //don't need to strip away the l and e.
   //When you take in a list, it starts at "l". Increment the lIndex by 1 to get to the content.
-  let lIndex = 0;
-  for (let i = 0; i < input.length; i++) {
-    if (input[i] == "l") {
-      lIndex = i;
-      break;
-    }
-  }
+  let lIndex = input.indexOf("l");
 
   let finalResult = [];
   let loop = 0;
